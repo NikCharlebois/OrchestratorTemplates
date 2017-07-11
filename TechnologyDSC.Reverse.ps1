@@ -36,7 +36,7 @@ $Script:dscConfigContent = "" # Core Variable that will contain the content of y
 $DSCSource = "[**TechDSCModulePath]" # Path to the root folder of your technology's DSC Module (e.g. C:\Program Files\WindowsPowerShell\SharePointDSC);
 $DSCVersion = "7.1.0.0" # Version of the DSC module for the technology (e.g. 1.0.0.0);
 $Script:DSCPath = $DSCSource + $DSCVersion # Dynamic path to include the version number as a folder;
-$Script:configName = "SQLServer" # Name of the output configuration. This will be the name that follows the Configuration keyword in the output script;
+$Script:configName = "[**ConfigName]" # Name of the output configuration. This will be the name that follows the Configuration keyword in the output script;
 
 <# Retrieves Information about the current script from the PSScriptInfo section above #>
 try {
@@ -71,16 +71,16 @@ function Orchestrator
     $Script:dscConfigContent += "    Node $env:COMPUTERNAME`r`n"
     $Script:dscConfigContent += "    {`r`n"
     
-    Write-Host "["$spServer.Name"] Scanning SQL Server Memory..." -BackgroundColor DarkGreen -ForegroundColor White
-    Read-SQLMemory -SQLInstanceName $sqlInstance.Instance
+    Write-Host "Scanning [**Resource Description]..." -BackgroundColor DarkGreen -ForegroundColor White
+    Read-[**ResourceName]
 
-    Write-Host "["$spServer.Name"] Configuring Local Configuration Manager (LCM)..." -BackgroundColor DarkGreen -ForegroundColor White
+    Write-Host "Configuring Local Configuration Manager (LCM)..." -BackgroundColor DarkGreen -ForegroundColor White
     Set-LCM
 
     $Script:dscConfigContent += "`r`n    }`r`n"           
     $Script:dscConfigContent += "}`r`n"
 
-    Write-Host "["$spServer.Name"] Setting Configuration Data..." -BackgroundColor DarkGreen -ForegroundColor White
+    Write-Host "Setting Configuration Data..." -BackgroundColor DarkGreen -ForegroundColor White
     Set-ConfigurationData
 
     $Script:dscConfigContent += "$Script:configName -ConfigurationData `$ConfigData"
