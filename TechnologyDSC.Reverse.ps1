@@ -17,7 +17,7 @@
 * Initial Release;
 #>
 
-#Requires -Modules @{ModuleName="ReverseDSC";ModuleVersion="1.7.3.0"},@{ModuleName="[**TechDSCModule]";ModuleVersion="[**TechDSCModuleVersion]"}
+#Requires -Modules @{ModuleName="ReverseDSC";ModuleVersion="1.9.0.0"},@{ModuleName="[**TechDSCModule]";ModuleVersion="[**TechDSCModuleVersion]"}
 
 <# 
 
@@ -61,7 +61,7 @@ function Orchestrator
     Import-Module -Name $module -Force
     
     
-    $Script:dscConfigContent += "<# Generated with SQLServer.Reverse " + $script:version + " #>`r`n"   
+    $Script:dscConfigContent += "<# Generated with [**TechName].Reverse " + $script:version + " #>`r`n"   
     $Script:dscConfigContent += "Configuration $Script:configName`r`n"
     $Script:dscConfigContent += "{`r`n"
 
